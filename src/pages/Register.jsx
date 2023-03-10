@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import Button from "../components/Button";
+import FromControl from "../components/FromControl";
 import { SectionTitle } from "../components/SectionTitle";
 
 const Register = () => {
@@ -10,26 +12,46 @@ const Register = () => {
   });
   const handleRegister = (e) => {
     e.preventDefault();
+    console.log(formFields)
+
+    setFromFields({
+      name:"",
+      email:"",
+      password:""
+    })
   };
 
   return (
-    <div className="register flex flex-col justify-center items-center">
+    <div className="register flex flex-col justify-center items-center mt-20">
       <form onSubmit={handleRegister} className="flex flex-col gap-5">
         <SectionTitle title={"Register ......"} />
 
-        <div className="form-control flex flex-col ga-2">
-          <label htmlFor="name" className="cursor-pointer"> Name</label>
-          <input
-            type="text"
-            placeholder="write your name"
-            id="name"
-            value={formFields.name}
-            onChange={(e) =>
-              setFromFields({ ...formFields, name: e.target.value })
-            }
-            className="border py-3 px-5 w-[25rem] rounded outline-none focus:border-violet-500"
-          />
-        </div>
+        <FromControl
+          label="name"
+          labelInner="Name"
+          inputType="text"
+          placeholder="Write your name ?"
+          formFields={formFields}
+          setFromFields={setFromFields}
+        />
+        <FromControl
+          label="email"
+          labelInner="Email"
+          inputType="eamil"
+          placeholder="Write your email ?"
+          formFields={formFields}
+          setFromFields={setFromFields}
+        />
+        <FromControl
+          label="password"
+          labelInner="Password"
+          inputType="password"
+          placeholder="Write your password ?"
+          formFields={formFields}
+          setFromFields={setFromFields}
+        />
+
+      <Button text="Register" submit/>
       </form>
     </div>
   );

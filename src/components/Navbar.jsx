@@ -14,7 +14,7 @@ const Navbar = () => {
         </div>
         {/* <div>
           <p>
-            Logged in as: <span>Rafiul islam</span>
+            Logged in as: <span className=' text-violet-500>Rafiul islam</span>
           </p>
         </div> */}
       </nav>

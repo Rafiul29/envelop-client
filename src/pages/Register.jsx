@@ -1,8 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import Button from "../components/Button";
+import ErrorMessage from "../components/ErrorMessage";
 import FromControl from "../components/FromControl";
-import { SectionTitle } from "../components/SectionTitle";
+import SectionTitle  from "../components/SectionTitle";
 import { useSignup } from "../hooks/useSignup";
 
 const Register = () => {
@@ -58,7 +59,7 @@ const {signup,isLoading,error}=useSignup()
         />
 
       <Button text={isLoading ? "Registering..": "Register"} submit/>
-      {error && <p className="bg-rose-50 p-5 border border-rose-500 text-rose-500 rounded">{error}</p>}
+      {error && <ErrorMessage error={error}/>}
       </form>
     </div>
   );

@@ -1,18 +1,25 @@
 import React from "react";
 import { useState } from "react";
 import Button from "../components/Button";
+import ErrorMessage from "../components/ErrorMessage";
 import FromControl from "../components/FromControl";
-import { SectionTitle } from "../components/SectionTitle";
+import SectionTitle from "../components/SectionTitle";
+import { useLogin } from "../hooks/useLogin";
 
 const Login = () => {
+
   const [formFields, setFromFields] = useState({
     email: "",
     password: "",
   });
-  const handleLogin = (e) => {
+
+const {login,isLoading,error}=useLogin()
+
+  const handleLogin = async(e) => {
     e.preventDefault();
     console.log(formFields)
 
+    await login(formFields.email,formFields.password)
     setFromFields({
       email:"",
       password:""
@@ -42,7 +49,8 @@ const Login = () => {
           setFromFields={setFromFields}
         />
 
-      <Button text="Login" submit/>
+      <Button text={isLoading ? "logging..." : "Login"} submit/>
+      {error && <ErrorMessage error={error}/>}
       </form>
     </div>
   );

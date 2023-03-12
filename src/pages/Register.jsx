@@ -3,22 +3,28 @@ import { useState } from "react";
 import Button from "../components/Button";
 import FromControl from "../components/FromControl";
 import { SectionTitle } from "../components/SectionTitle";
+import { useSignup } from "../hooks/useSignup";
 
 const Register = () => {
+
   const [formFields, setFromFields] = useState({
     name: "",
     email: "",
     password: "",
   });
-  const handleRegister = (e) => {
+const {signup,isLoading,error}=useSignup()
+
+  const handleRegister = async(e) => {
     e.preventDefault();
-    console.log(formFields)
+  
+   await signup(formFields.name,formFields.email,formFields.password)
 
     setFromFields({
       name:"",
       email:"",
       password:""
     })
+    
   };
 
   return (
@@ -51,10 +57,11 @@ const Register = () => {
           setFromFields={setFromFields}
         />
 
-      <Button text="Register" submit/>
+      <Button text={isLoading ? "Registering..": "Register"} submit/>
+      {error && <p className="bg-rose-50 p-5 border border-rose-500 text-rose-500 rounded">{error}</p>}
       </form>
     </div>
   );
 };
 
-export default Register;
+export default React.memo(Register);

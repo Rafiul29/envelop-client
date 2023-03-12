@@ -29,4 +29,4 @@ const FromControl = ({
   );
 };
 
-export default FromControl;
+export default React.memo(FromControl);
